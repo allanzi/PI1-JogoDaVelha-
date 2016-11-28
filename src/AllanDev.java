@@ -12,7 +12,8 @@ import javax.swing.JOptionPane;
  * @author joao.sbviana
  */
 public class AllanDev {
-    public static void main(String[] args) {
+    static String tabuleiro()
+    {
         String LinhaColuna;
         
         LinhaColuna = JOptionPane.showInputDialog(null,   
@@ -24,30 +25,39 @@ public class AllanDev {
                 "Digite a linha e coluna:  \n"
                 + "Exemplo: (1,1)");
         
+        String badah = "   1   2   3  \n"+
+                "1    |   |   |  \n"+
+                "2    |   |   |  \n"+
+                "3    |   |   |  \n"+
+                "\n"+
+                "Digite a linha e coluna:  \n"
+                + "Exemplo: (1,1)";
+        
+        System.out.println(badah);
+        
+        String newBadah = badah.substring(0,18)+"x"+badah.substring(19,98);
+        
+        System.out.print(newBadah);
+        
+        return LinhaColuna;
+    }
+    
+    static String[] inciaTabuleiro()
+    {
+        String LinhaColuna;
+        
+        LinhaColuna = tabuleiro();
+        
         while (LinhaColuna.length() < 0 || LinhaColuna.contains(",") == false) {            
             JOptionPane.showMessageDialog(null, "Digite corretamente uma linha e coluna");
             
-            LinhaColuna = JOptionPane.showInputDialog(null,   
-                "   1   2   3  \n"+
-                "1    |   |   |  \n"+
-                "2    |   |   |  \n"+
-                "3    |   |   |  \n"+
-                "\n"+
-                "Digite a linha e coluna:  \n"
-                + "Exemplo: (1,1)");
+            LinhaColuna = tabuleiro();
         }
         
-        while(Pattern.matches("[a-zA-Z]+", LinhaColuna)){
+        while(Pattern.matches("[a-zA-Z]+", LinhaColuna)== true){
             JOptionPane.showMessageDialog(null, "Somente digite números separados por ','");
             
-            LinhaColuna = JOptionPane.showInputDialog(null,   
-                "   1   2   3  \n"+
-                "1    |   |   |  \n"+
-                "2    |   |   |  \n"+
-                "3    |   |   |  \n"+
-                "\n"+
-                "Digite a linha e coluna:  \n"
-                + "Exemplo: (1,1)");
+            LinhaColuna = tabuleiro();
         }
         
         String[] parts = LinhaColuna.split(",");
@@ -58,56 +68,49 @@ public class AllanDev {
         while((linha < 0 || linha > 3) || (coluna < 0 || coluna > 3)){
             JOptionPane.showMessageDialog(null, "Digite uma linha e/ou coluna válida");
             
-            LinhaColuna = JOptionPane.showInputDialog(null,   
-                "   1   2   3  \n"+
-                "1    |   |   |  \n"+
-                "2    |   |   |  \n"+
-                "3    |   |   |  \n"+
-                "\n"+
-                "Digite a linha e coluna:  \n"
-                + "Exemplo: (1,1)");
+            LinhaColuna = tabuleiro();
         }
+        
+        return parts;
     }
     
-    static String Jogadores(int acao, int jogador, String nome) {
-        String jogador1 = "", jogador2 = "", resposta = "";
+    public static void main(String[] args) {
         
-        switch(acao){
-            
-            case 1:
-                switch(jogador){
-                    case 1:
-                        jogador1 = nome;
-                        resposta = nome;
-                    break;
-                    case 2:
-                        jogador2 = nome;
-                        resposta = nome;
-                    break;
-                    default:
-                        System.out.print("Número de jogador inválido");
-                }
-                
-            break;
-            case 0:
-                
-                switch(jogador){
-                    case 1:
-                        resposta = jogador1;
-                    break;
-                    case 2:
-                        resposta = jogador2;
-                    break;
-                    default:
-                        System.out.print("Número de jogador inválido");
-                }
-                
-            break;
-            default:
-                System.out.print("Ação inválida");
-                
+        String parts[] = inciaTabuleiro();
+        
+        int linha = Integer.parseInt(parts[0]);
+        int coluna = Integer.parseInt(parts[1]);
+
+        int escolhas[][] = new int[3][3];
+        
+        while(escolhas[linha][coluna] != 0){
+           JOptionPane.showMessageDialog(null, "Esta posição já está ocupada!");
+           
+           parts = inciaTabuleiro();
         }
         
-        return resposta;
+        if (linha == 1 && coluna == 1) {
+            
+        }else if (linha == 1 && coluna == 2) {
+            
+        }else if (linha == 1 && coluna == 3) {
+            
+        }
+        
+        else if (linha == 2 && coluna == 1) {
+            
+        }else if (linha == 2 && coluna == 2) {
+            
+        }else if (linha == 2 && coluna == 3) {
+            
+        }
+        
+        else if (linha == 3 && coluna == 1) {
+            
+        }else if (linha == 3 && coluna == 2) {
+            
+        }else if (linha == 3 && coluna == 3) {
+            
+        }
     }
 }
