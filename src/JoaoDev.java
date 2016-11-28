@@ -13,49 +13,70 @@ import javax.swing.JOptionPane;
  * @author joao.sbviana
  */
 public class JoaoDev {
-    static String NomeJ1 (){
-        String nomeJ1 = JOptionPane.showInputDialog("Jogador 1, digite seu nome:");
-        return nomeJ1;
-    }
-    static String NomeJ2 (){
-        String nomeJ1 = JOptionPane.showInputDialog("Jogador 2, digite seu nome:");
-        return nomeJ1;
-    }
-    static byte XouO (String nomeJ1,String nomeJ2){
-        String jogador1 =nomeJ1;
-        String jogador2 =nomeJ2;
-        byte escolha = Byte.parseByte(JOptionPane.showInputDialog(jogador1 +" escolha um número"
-                + "0 e 1: \n0 - O \n1 - X \n"));        
-        while (escolha > 0 && escolha < 2){
+
+    static byte XouO (){
+        
+        byte escolha = Byte.parseByte(JOptionPane.showInputDialog("jogador1 escolha um número"
+                + " 0 e 1: \n0 - O \n1 - X \n"));  
+        
+        while (escolha < 0 || escolha > 1){
+            JOptionPane.showMessageDialog(null, "Digite um número válido!");
+            
+            escolha = Byte.parseByte(JOptionPane.showInputDialog("jogador1 escolha um número"
+                + " 0 e 1: \n0 - O \n1 - X \n"));  
+        }
+        
         switch (escolha){
             case 0: 
-                JOptionPane.showMessageDialog(null,jogador1 +" você escolheu O, então"+ jogador2
-                    + " ficou com X");
-                break;
+                JOptionPane.showMessageDialog(null,"jogador1 você escolheu O, então jogador2 ficou com X");
+            break;
             case 1: 
-                JOptionPane.showMessageDialog(null,jogador1 +" você escolheu O, então"+ jogador2
-                    + " ficou com X");
-                break;
-            default:
-                JOptionPane.showInputDialog("ERRO! Digite apenas um número entre 0 e 1");
-        }
-    } return escolha;
+                JOptionPane.showMessageDialog(null,"jogador1 você escolheu X, então jogador2 ficou com O");
+            break;
+        } 
+        return escolha;
     }
-    static byte mostraXouO (byte escolha, String jogador1, String jogador2){
+    static int mostraXouO (int escolha){
         Random gerador = new Random ();
-        byte resultado = gerador.nextBytes(10) +1;
+        int resultado = 0;
+        
+        JOptionPane.showMessageDialog(null, "Vamos fazer um jogo de par ou impar, para ver quem começa a jogar");
+        int pOUi = Integer.parseInt(JOptionPane.showInputDialog("Jogador 1 digite: \n0 para par \n1 para ímpar"));
+        
+        switch (pOUi){
+            case 0: 
+                JOptionPane.showMessageDialog(null,"Jogardor 1 escolheu par, então Jogador 2 fica com ímpar");
+                int numJ1 = Integer.parseInt(JOptionPane.showInputDialog("Jogador 1 digite um número de 0 a 10"));
+                int numJ2 = Integer.parseInt (JOptionPane.showInputDialog("Jogador 2 digite um númerpo de 0 a 10"));
+                resultado = gerador.nextInt(10) +1;
+        
+        if (resultado % 2 == 0){
+            JOptionPane.showMessageDialog(null, "         [ "+resultado+" ]        "+"\njogador1  ganhou, então ele começa!! ");
+        }else{
+            JOptionPane.showMessageDialog(null, "         [ "+resultado+" ]        "+"\njogador2 ganhou, então ele começa!! ");
+        }  
+        break;
+            case 1: 
+                JOptionPane.showMessageDialog(null,"Jogardor 1 escolheu ímpar, então Jogador 2 fica com par");
+                numJ1 = Integer.parseInt(JOptionPane.showInputDialog("Jogador 1 digite um número de 0 a 10"));
+                numJ2 = Integer.parseInt (JOptionPane.showInputDialog("Jogador 2 digite um númerpo de 0 a 10"));
+                resultado = gerador.nextInt(10) +1;
         
         if (resultado % 2 == 1){
-            JOptionPane.showMessageDialog(null, "         [ "+resultado+" ]        "+"\n"+jogador2 + " ganhou, então ele começa!! ");
+            JOptionPane.showMessageDialog(null, "                               [ "+resultado+" ]        "+"\njogador1  ganhou, então ele começa!! ");
         }else{
-            JOptionPane.showMessageDialog(null, "         [ "+resultado+" ]        "+"\n"+jogador1 + " ganhou, então ele começa!! ");
-        }return resultado;
+            JOptionPane.showMessageDialog(null, "                               [ "+resultado+" ]        "+"\njogador2 ganhou, então ele começa!! ");
+        }    
+        break;
+            default:
+            JOptionPane.showMessageDialog(null, "ERRO!! Digite apenas 0 ou 1");
+        }
+        return resultado;
     }
     public static void main(String[] args) {
-        String jogador1 = NomeJ1();
-        String jogador2 = NomeJ2();
-        byte escolha = XouO(jogador1, jogador2);
-        byte resultadoXouO = mostraXouO(escolha, jogador1, jogador2);
+        int escolha = XouO();
+        int resultadoXouO = mostraXouO(0);
+        
     }
     
 }
