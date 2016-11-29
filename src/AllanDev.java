@@ -12,52 +12,32 @@ import javax.swing.JOptionPane;
  * @author joao.sbviana
  */
 public class AllanDev {
-    static String tabuleiro()
+    static String tabuleiro(String tabuleiro)
     {
         String LinhaColuna;
         
-        LinhaColuna = JOptionPane.showInputDialog(null,   
-                "   1   2   3  \n"+
-                "1    |   |   |  \n"+
-                "2    |   |   |  \n"+
-                "3    |   |   |  \n"+
-                "\n"+
-                "Digite a linha e coluna:  \n"
+        LinhaColuna = JOptionPane.showInputDialog(null,tabuleiro
                 + "Exemplo: (1,1)");
-        
-        String badah = "   1   2   3  \n"+
-                "1    |   |   |  \n"+
-                "2    |   |   |  \n"+
-                "3    |   |   |  \n"+
-                "\n"+
-                "Digite a linha e coluna:  \n"
-                + "Exemplo: (1,1)";
-        
-        System.out.println(badah);
-        
-        String newBadah = badah.substring(0,18)+"x"+badah.substring(19,98);
-        
-        System.out.print(newBadah);
         
         return LinhaColuna;
     }
     
-    static String[] inciaTabuleiro()
+    static String[] inciaTabuleiro(String tabuleiro)
     {
         String LinhaColuna;
         
-        LinhaColuna = tabuleiro();
+        LinhaColuna = tabuleiro(tabuleiro);
         
         while (LinhaColuna.length() < 0 || LinhaColuna.contains(",") == false) {            
             JOptionPane.showMessageDialog(null, "Digite corretamente uma linha e coluna");
             
-            LinhaColuna = tabuleiro();
+            inciaTabuleiro(tabuleiro);
         }
         
         while(Pattern.matches("[a-zA-Z]+", LinhaColuna)== true){
             JOptionPane.showMessageDialog(null, "Somente digite números separados por ','");
             
-            LinhaColuna = tabuleiro();
+            inciaTabuleiro(tabuleiro);
         }
         
         String[] parts = LinhaColuna.split(",");
@@ -68,49 +48,86 @@ public class AllanDev {
         while((linha < 0 || linha > 3) || (coluna < 0 || coluna > 3)){
             JOptionPane.showMessageDialog(null, "Digite uma linha e/ou coluna válida");
             
-            LinhaColuna = tabuleiro();
+            inciaTabuleiro(tabuleiro);
         }
         
         return parts;
     }
     
-    public static void main(String[] args) {
-        
-        String parts[] = inciaTabuleiro();
-        
-        int linha = Integer.parseInt(parts[0]);
-        int coluna = Integer.parseInt(parts[1]);
-
-        int escolhas[][] = new int[3][3];
-        
-        while(escolhas[linha][coluna] != 0){
-           JOptionPane.showMessageDialog(null, "Esta posição já está ocupada!");
-           
-           parts = inciaTabuleiro();
-        }
-        
+    static String alteraTabuleiro(int linha, int coluna, String tabuleiro)
+    {
         if (linha == 1 && coluna == 1) {
+            
+            tabuleiro = tabuleiro.substring(0,18)+"x"+tabuleiro.substring(19,94);
             
         }else if (linha == 1 && coluna == 2) {
             
-        }else if (linha == 1 && coluna == 3) {
+            tabuleiro = tabuleiro.substring(0,22)+"x"+tabuleiro.substring(23,94);
             
+        }else if (linha == 1 && coluna == 3) {
+            tabuleiro = tabuleiro.substring(0,26)+"x"+tabuleiro.substring(27,94);
         }
         
         else if (linha == 2 && coluna == 1) {
             
+            tabuleiro = tabuleiro.substring(0,35)+"x"+tabuleiro.substring(31,94);
+            
         }else if (linha == 2 && coluna == 2) {
             
+            tabuleiro = tabuleiro.substring(0,39)+"x"+tabuleiro.substring(40,94);
+            
         }else if (linha == 2 && coluna == 3) {
+            
+            tabuleiro = tabuleiro.substring(0,43)+"x"+tabuleiro.substring(44,94);
             
         }
         
         else if (linha == 3 && coluna == 1) {
             
+            tabuleiro = tabuleiro.substring(0,52)+"x"+tabuleiro.substring(53,94);
+            
         }else if (linha == 3 && coluna == 2) {
             
-        }else if (linha == 3 && coluna == 3) {
+            tabuleiro = tabuleiro.substring(0,56)+"x"+tabuleiro.substring(57,94);
             
+        }else if (linha == 3 && coluna == 3) {
+            tabuleiro = tabuleiro.substring(0,60)+"x"+tabuleiro.substring(61,94);
         }
+        
+        return tabuleiro;
+    }
+    
+    public static void main(String[] args) {
+        int contator = 0;
+        
+        String tabuleiro = "   1   2   3  \n"+
+            "1    |   |   |  \n"+
+            "2    |   |   |  \n"+
+            "3    |   |   |  \n"+
+            "\n"+
+            "Digite a linha e coluna:  \n";
+
+        String parts[] = inciaTabuleiro(tabuleiro);
+
+        int linha = Integer.parseInt(parts[0]);
+        int coluna = Integer.parseInt(parts[1]);
+
+        int escolhas[][] = new int[4][4];
+
+        while(escolhas[linha][coluna] != 0){
+           JOptionPane.showMessageDialog(null, "Esta posição já está ocupada!");
+
+           parts = inciaTabuleiro(tabuleiro);
+        }
+        
+        while (contator < 2) {            
+            String tabuleiroAlterado =  alteraTabuleiro(linha, coluna, tabuleiro);
+
+            contator++;
+
+            parts = inciaTabuleiro(tabuleiroAlterado);
+        }
+        
+        JOptionPane.showMessageDialog(null, "Você ganhou, parabéns!");
     }
 }
