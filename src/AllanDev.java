@@ -94,7 +94,9 @@ public class AllanDev {
     }
     
     public static void main(String[] args) {
-        int contator = 0;
+        int contator = 0, linha = 0, coluna = 0;
+        int escolhas[][] = new int[4][4];
+        String parts[] = new String[10];
         
         String tabuleiro = "   1   2   3  \n"+
             "1    |   |   |  \n"+
@@ -102,19 +104,19 @@ public class AllanDev {
             "3    |   |   |  \n"+
             "\n"+
             "Digite a linha e coluna:  \n";
-
-        String parts[] = inciaTabuleiro(tabuleiro);
         
-        int linha = Integer.parseInt(parts[0]);
-        int coluna = Integer.parseInt(parts[1]);
+        do {            
+            parts = inciaTabuleiro(tabuleiro);
+            
+            if(escolhas[linha][coluna] != 0){
+                JOptionPane.showMessageDialog(null, "Esta posição já está ocupada!");
+            }
+            
+            linha = Integer.parseInt(parts[0]);
+            coluna = Integer.parseInt(parts[1]);
 
-        int escolhas[][] = new int[4][4];
-
-        while(escolhas[linha][coluna] != 0){
-           JOptionPane.showMessageDialog(null, "Esta posição já está ocupada!");
-
-           parts = inciaTabuleiro(tabuleiro);
-        }
+            escolhas[1][1] = 1;
+        } while (escolhas[linha][coluna] != 0);
         
         while (contator < 2) {            
             String tabuleiroAlterado =  alteraTabuleiro(linha, coluna, tabuleiro);
