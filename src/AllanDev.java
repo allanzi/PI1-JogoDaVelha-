@@ -26,30 +26,31 @@ public class AllanDev {
     {
         String LinhaColuna;
         
-        LinhaColuna = tabuleiro(tabuleiro);
+        String parts[] = new String[10];
         
-        while (LinhaColuna.length() < 0 || LinhaColuna.contains(",") == false) {            
-            JOptionPane.showMessageDialog(null, "Digite corretamente uma linha e coluna");
+        int linha, coluna;
+        
+        do{            
+            LinhaColuna = tabuleiro(tabuleiro);
             
-            inciaTabuleiro(tabuleiro);
-        }
+            if (LinhaColuna.length() <= 0) {
+                JOptionPane.showMessageDialog(null, "Digite corretamente uma linha e coluna 3");
+            }else if (LinhaColuna.contains(",")) {
+                JOptionPane.showMessageDialog(null, "Digite corretamente uma linha e coluna 2");
+            }else if (Pattern.matches("[a-zA-Z]+", LinhaColuna)== true) {
+                JOptionPane.showMessageDialog(null, "Digite corretamente uma linha e coluna 1");
+            }
+                
+        }while((Pattern.matches("[a-zA-Z],[a-zA-Z]{2}+", LinhaColuna)== true) || (Pattern.matches("[a-zA-Z]+", LinhaColuna)== true) || (LinhaColuna.length() <= 0) || (LinhaColuna.contains(",") == false));
         
-        while(Pattern.matches("[a-zA-Z]+", LinhaColuna)== true){
-            JOptionPane.showMessageDialog(null, "Somente digite números separados por ','");
+        parts = LinhaColuna.split(",");
+        
+            linha = Integer.parseInt(parts[0]);
+            coluna = Integer.parseInt(parts[1]);
             
-            inciaTabuleiro(tabuleiro);
-        }
-        
-        String[] parts = LinhaColuna.split(",");
-        
-        int linha = Integer.parseInt(parts[0]);
-        int coluna = Integer.parseInt(parts[1]);
-        
-        while((linha < 0 || linha > 3) || (coluna < 0 || coluna > 3)){
-            JOptionPane.showMessageDialog(null, "Digite uma linha e/ou coluna válida");
-            
-            inciaTabuleiro(tabuleiro);
-        }
+            if ((linha < 0 || linha > 3) || (coluna < 0 || coluna > 3)) {
+                JOptionPane.showMessageDialog(null, "Digite uma linha e/ou coluna válida");
+            }
         
         return parts;
     }
@@ -108,7 +109,7 @@ public class AllanDev {
             "Digite a linha e coluna:  \n";
 
         String parts[] = inciaTabuleiro(tabuleiro);
-
+        
         int linha = Integer.parseInt(parts[0]);
         int coluna = Integer.parseInt(parts[1]);
 
