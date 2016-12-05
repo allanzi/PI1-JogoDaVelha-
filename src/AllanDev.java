@@ -33,24 +33,19 @@ public class AllanDev {
         do{            
             LinhaColuna = tabuleiro(tabuleiro);
             
-            if (LinhaColuna.length() <= 0) {
-                JOptionPane.showMessageDialog(null, "Digite corretamente uma linha e coluna 3");
-            }else if (LinhaColuna.contains(",")) {
-                JOptionPane.showMessageDialog(null, "Digite corretamente uma linha e coluna 2");
-            }else if (Pattern.matches("[a-zA-Z]+", LinhaColuna)== true) {
-                JOptionPane.showMessageDialog(null, "Digite corretamente uma linha e coluna 1");
+            if ((Pattern.matches("([a-zA-Z]*[,])?[a-zA-Z]+", LinhaColuna)== true) || (Pattern.matches("[a-zA-Z]+", LinhaColuna)== true) || (LinhaColuna.length() <= 0) || (LinhaColuna.contains(",") == false)) {
+                JOptionPane.showMessageDialog(null, "Digite corretamente uma linha e coluna");
             }
-                
-        }while((Pattern.matches("[a-zA-Z],[a-zA-Z]{2}+", LinhaColuna)== true) || (Pattern.matches("[a-zA-Z]+", LinhaColuna)== true) || (LinhaColuna.length() <= 0) || (LinhaColuna.contains(",") == false));
-        
-        parts = LinhaColuna.split(",");
-        
+            
+            parts = LinhaColuna.split(",");
             linha = Integer.parseInt(parts[0]);
             coluna = Integer.parseInt(parts[1]);
             
             if ((linha < 0 || linha > 3) || (coluna < 0 || coluna > 3)) {
                 JOptionPane.showMessageDialog(null, "Digite uma linha e/ou coluna válida");
             }
+                
+        }while((Pattern.matches("([a-zA-Z]*[,])?[a-zA-Z]+", LinhaColuna)== true) || (Pattern.matches("[a-zA-Z]+", LinhaColuna)== true) || (LinhaColuna.length() <= 0) || (LinhaColuna.contains(",") == false) || (linha < 0 || linha > 3) || (coluna < 0 || coluna > 3));
         
         return parts;
     }
