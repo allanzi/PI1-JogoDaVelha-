@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author joao.sbviana
+ * @author allan.psantos4
  */
 public class AllanDev {
     static String tabuleiro(String tabuleiro)
@@ -94,8 +94,24 @@ public class AllanDev {
     }
     
     static boolean verificasJogada(int escolhas[][]){
-        if (((escolhas[1][0] == escolhas[1][1]) && (escolhas[1][1] == escolhas[1][2])) && (escolhas[1][0] == 1 && escolhas[1][1] == 1 && escolhas[1][2] == 1)) {
-            System.out.println("foi");
+        if (((escolhas[1][1] == escolhas[1][2]) && (escolhas[1][2] == escolhas[1][3])) && (escolhas[1][1] == 1 && escolhas[1][2] == 1 && escolhas[1][3] == 1)) {
+            
+            return true;
+            
+        }else if(((escolhas[2][1] == escolhas[2][2]) && (escolhas[2][2] == escolhas[2][3])) && (escolhas[2][1] == 1 && escolhas[2][2] == 1 && escolhas[2][3] == 1)){
+           
+            return true;
+            
+        }else if(((escolhas[3][1] == escolhas[3][2]) && (escolhas[3][2] == escolhas[3][3])) && (escolhas[3][1] == 1 && escolhas[3][2] == 1 && escolhas[3][3] == 1)){
+            
+            return true;
+            
+        }else if(((escolhas[1][1] == escolhas[2][1]) && (escolhas[2][1] == escolhas[3][1])) && (escolhas[1][1] == 1 && escolhas[2][1] == 1 && escolhas[3][1] == 1)){
+            
+            return true;
+            
+        }else if(((escolhas[1][2] == escolhas[2][2]) && (escolhas[2][2] == escolhas[3][2])) && (escolhas[1][2] == 1 && escolhas[2][2] == 1 && escolhas[3][2] == 1)){
+            
             return true;
         }
         
@@ -134,13 +150,25 @@ public class AllanDev {
             coluna = 0;
             
             if (verificasJogada(escolhas) == true) {
+                
+                contator++;
+                
+                if (contator <= 2) {
+                    JOptionPane.showMessageDialog(null, "Ganhou, mas ainda não acabou!");
+                }
+                
+                for (int i = 0; i < escolhas.length; i++) {
+                    for (int j = 0; j < escolhas[i].length; j++) {
+                        escolhas[i][j] = 0;
+                    }
+                }
+                
                 tabuleiro = "   1   2   3  \n"+
                             "1    |   |   |  \n"+
                             "2    |   |   |  \n"+
                             "3    |   |   |  \n"+
                             "\n"+
                             "Digite a linha e coluna:  \n";
-                contator++;
             }
             
         } while (contator <= 2);
