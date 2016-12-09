@@ -1,4 +1,3 @@
-
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 /*
@@ -28,13 +27,14 @@ public class AllanDev {
         
         String parts[] = new String[10];
         
-        int linha, coluna;
+        int linha = 0, coluna = 0;
         
         do{            
             LinhaColuna = tabuleiro(tabuleiro);
             
             if ((Pattern.matches("([a-zA-Z]*[,])?[a-zA-Z]+", LinhaColuna)== true) || (Pattern.matches("[a-zA-Z]+", LinhaColuna)== true) || (LinhaColuna.length() <= 0) || (LinhaColuna.contains(",") == false)) {
                 JOptionPane.showMessageDialog(null, "Digite corretamente uma linha e coluna");
+                continue;
             }
             
             parts = LinhaColuna.split(",");
@@ -66,7 +66,7 @@ public class AllanDev {
         
         else if (linha == 2 && coluna == 1) {
             
-            tabuleiro = tabuleiro.substring(0,35)+"x"+tabuleiro.substring(31,94);
+            tabuleiro = tabuleiro.substring(0,35)+"x"+tabuleiro.substring(36,94);
             
         }else if (linha == 2 && coluna == 2) {
             
@@ -93,6 +93,15 @@ public class AllanDev {
         return tabuleiro;
     }
     
+    static boolean verificasJogada(int escolhas[][]){
+        if (((escolhas[1][0] == escolhas[1][1]) && (escolhas[1][1] == escolhas[1][2])) && (escolhas[1][0] == 1 && escolhas[1][1] == 1 && escolhas[1][2] == 1)) {
+            System.out.println("foi");
+            return true;
+        }
+        
+        return false;
+    }
+    
     public static void main(String[] args) {
         int contator = 0, linha = 0, coluna = 0;
         int escolhas[][] = new int[4][4];
@@ -105,26 +114,36 @@ public class AllanDev {
             "\n"+
             "Digite a linha e coluna:  \n";
         
-        do {            
+        do {
             parts = inciaTabuleiro(tabuleiro);
+            
+            linha = Integer.parseInt(parts[0]);
+
+            coluna = Integer.parseInt(parts[1]);
             
             if(escolhas[linha][coluna] != 0){
                 JOptionPane.showMessageDialog(null, "Esta posição já está ocupada!");
+                continue;
+            } 
+            
+            escolhas[linha][coluna] = 1;
+
+            tabuleiro =  alteraTabuleiro(linha, coluna, tabuleiro);
+            
+            linha = 0;
+            coluna = 0;
+            
+            if (verificasJogada(escolhas) == true) {
+                tabuleiro = "   1   2   3  \n"+
+                            "1    |   |   |  \n"+
+                            "2    |   |   |  \n"+
+                            "3    |   |   |  \n"+
+                            "\n"+
+                            "Digite a linha e coluna:  \n";
+                contator++;
             }
             
-            linha = Integer.parseInt(parts[0]);
-            coluna = Integer.parseInt(parts[1]);
-
-            escolhas[1][1] = 1;
-        } while (escolhas[linha][coluna] != 0);
-        
-        while (contator < 2) {            
-            String tabuleiroAlterado =  alteraTabuleiro(linha, coluna, tabuleiro);
-
-            contator++;
-
-            parts = inciaTabuleiro(tabuleiroAlterado);
-        }
+        } while (contator <= 2);
         
         JOptionPane.showMessageDialog(null, "Você ganhou, parabéns!");
     }
