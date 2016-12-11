@@ -1,11 +1,17 @@
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+/*****************************************************************************************/
+/** Centro Universitário Senac                                                          **/
+/** TADS - 2º Semestre de 2016                                                          **/
+/**                                                                                     **/
+/** Projeto Integrador I                                                                **/ 
+/** Arquivo: JogoDaVelha                                                                **/
+/**                                                                                     **/
+/** Allan Santos                                                                        **/
+/** João Sérgio Bitencourt Viana                                                        **/
+/**                                                                                     **/
+/** 11 de Dezembro de 2016                                                              **/
+/*****************************************************************************************/
 /**
  *
  * @author allan.psantos4
@@ -230,8 +236,6 @@ public class AllanDev {
                         contadorVelha++;
                         JOptionPane.showMessageDialog(null, "velha ganhou, mas o jogo ainda não acabou!");
                         break;
-                    default:
-                        break;
                 }
                 
                 JOptionPane.showMessageDialog(null, "Placar:  \n"
@@ -272,23 +276,37 @@ public class AllanDev {
         return 0;
     }
     
+    static int imprimeMenu(){
+        int opcao = Integer.parseInt(JOptionPane.showInputDialog("Deseja começar o jogo? \n0 - Sim \n1 - Não"));
+        
+        if (opcao == 1) {
+            return 1;
+        }
+        
+        return 0;
+    }
+    
     public static void main(String[] args) {
         JOptionPane.showMessageDialog(null, "Olá, sejam bem-vindos ao Jogo da Velha!!");
         
-        int ganhador = executaJogo();
+        int menu = imprimeMenu();
         
-        switch (ganhador) {
-            case 1:
-                JOptionPane.showMessageDialog(null, "O jogador: 1, ganhou o jogo!");
-                break;
-            case 2:
-                JOptionPane.showMessageDialog(null, "O jogador: 2, ganhou o jogo!");
-                break;
-            case -1:
-                JOptionPane.showMessageDialog(null, "Eita!! A velha ganhou o jogo!");
-                break;
-            default:
-                break;
+        if (menu == 0) {
+            int ganhador = executaJogo();
+        
+            switch (ganhador) {
+                case 1:
+                    JOptionPane.showMessageDialog(null, "O jogador: 1, ganhou o jogo!");
+                    break;
+                case 2:
+                    JOptionPane.showMessageDialog(null, "O jogador: 2, ganhou o jogo!");
+                    break;
+                case -1:
+                    JOptionPane.showMessageDialog(null, "Eita!! A velha ganhou o jogo!");
+                    break;
+            }
+        }else {
+            JOptionPane.showMessageDialog(null, "Até logo :D");
         }
     }
 }
