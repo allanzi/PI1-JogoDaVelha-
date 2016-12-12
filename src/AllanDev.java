@@ -226,15 +226,15 @@ public class AllanDev {
                 switch (verifica) {
                     case 1:
                         contador1++;
-                        JOptionPane.showMessageDialog(null, "Jogador 1 ganhou, mas o jogo ainda não acabou!");
+                        JOptionPane.showMessageDialog(null, "Jogador 1 ganhou a partida");
                         break;
                     case 2:
                         contador2++;
-                        JOptionPane.showMessageDialog(null, "Jogador 2 ganhou, mas o jogo ainda não acabou!");
+                        JOptionPane.showMessageDialog(null, "Jogador 2 ganhou a partida");
                         break;
                     case -1:
                         contadorVelha++;
-                        JOptionPane.showMessageDialog(null, "velha ganhou, mas o jogo ainda não acabou!");
+                        JOptionPane.showMessageDialog(null, "velha ganhou a partida");
                         break;
                 }
                 
@@ -265,11 +265,11 @@ public class AllanDev {
             
         } while (contadorVelha < 3 && contador1 < 3 && contador2 < 3);
         
-        if (contador1 >= 2) {
+        if (contador1 == 3) {
             return 1;
-        }else if (contador2 >= 2) {
+        }else if (contador2 == 3) {
             return 2;
-        }else if (contadorVelha >= 2) {
+        }else if (contadorVelha == 3) {
             return -1;
         }
         
